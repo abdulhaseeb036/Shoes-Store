@@ -1,7 +1,7 @@
 import React from 'react';
 
 function Signin() {
-    retun (
+    return (
         <h1>signin</h1>
     )
 }

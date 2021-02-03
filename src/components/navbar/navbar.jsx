@@ -1,13 +1,10 @@
 import React, { useState } from "react";
-// import { ReactComponent as CloseMenu } from "../assets/x.svg";
-// import { ReactComponent as MenuIcon } from "../assets/menu.svg";
 import Logo from '../../assests/profile.png';
 import Avatar from '@material-ui/core/Avatar';
 import styles from '../navbar/navbar.module.css';
-
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
-// import "./navbar.module.css";
+import {Link} from 'react-router-dom';
 
 const Navbar = () => {
   const [click, setClick] = useState(false);
@@ -26,32 +23,32 @@ const Navbar = () => {
 
         <ul className={click ? styles.navoptions.active : styles.navoptions}>
           <li className={styles.option} onClick={closeMobileMenu}>
-            <a href="#">ABOUT</a>
+            <Link to='/'>Home</Link>
           </li>
           <li className={styles.option} onClick={closeMobileMenu}>
-            <a href="#">CONTACT</a>
+            <a href="#">Shoes</a>
           </li>
           <li className={styles.option} onClick={closeMobileMenu}>
-            <a href="#">BLOG</a>
+            <a href="#">My account</a>
           </li>
           <li className={styles.option  + " " + styles.mobileoption} onClick={closeMobileMenu}>
-            <a href="#">SIGN-IN</a>
+            <Link to="signin" >SIGN-IN</Link>
           </li>
           <li className={styles.option + " " + styles.mobileoption} onClick={closeMobileMenu}>
-            <a href="" className={styles.signup}>
+            <Link to="signup" className={styles.signup}>
               SIGN-UP
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
       <ul className={styles.signinup}>
         <li className={styles.signin} onClick={closeMobileMenu}>
-          <a href="#">SIGN-IN</a>
+          <Link to="signin">SIGN-IN</Link>
         </li>
         <li onClick={closeMobileMenu}>
-          <a href="" className={styles.signupbtn}>
+          <Link to="signup" className={styles.signupbtn}>
             SIGN-UP
-          </a>
+          </Link>
         </li>
       </ul>
       <div className={styles.mobilemenu + styles.mobileoption } onClick={handleClick}>

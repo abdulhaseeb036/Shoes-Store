@@ -1,22 +1,24 @@
 import React from 'react';
 import Navbar from './navbar/navbar';
+import Home from '../components/home/home'
+import Signin from '../components/sigin/signin'
+import Signup from '../components/signup/signup'
 
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route,} from 'react-router-dom';
 
 
 function ReactRouter() {
     return (
         <div>
-            <Router>
-                <Switch>
-                <Navbar />
-                    <Route path="/" element={Header}></Route>
-                    <Route path="/products" element={Products}></Route>
-                    <Route path="/products/products-details" element={ProductDetails}></Route>
-                    <Route path="/signin" element={Signin}></Route>
-                    <Route path="/signup" element={Signup}></Route>
-                </Switch>
-            </Router>
+            <BrowserRouter>
+            <Navbar />
+                <Routes>
+                    <Route exact path="/" element={<Home />}></Route>
+                    <Route  path="signin" element={<Signin />}></Route>
+                    <Route  path="signup" element={<Signup />}></Route>
+                    <Route  path="*" element={"not found"}></Route>
+                </Routes>
+            </BrowserRouter>
         </div>
     )
 }

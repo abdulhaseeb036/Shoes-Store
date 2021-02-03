@@ -1,8 +1,8 @@
 import React from 'react';
 function Signup() {
   return (
-    <div className="App">
-        <h1>sigup</h1>
+    <div>
+        <h1>sigup Lorem ipsum dolor sit <br/>amet consectetur adipisicing elit. Iste cupiditate culpa ab, veritatis facilis quo commodi similique, id ea dolore vel exercitationem repellendus accusamus suscipit! Nulla provident asperiores et autem!</h1>
     </div>
   );
 }
