@@ -10,16 +10,60 @@ const Navbar = () => {
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
+  const [logo, setLogo] = useState();
+
+  // const changeAvaitor = () => {
+  //   `<div>
+  //   <input onChange={${(e) => setLogo(e.target.files[0])}} required className={${styles.logo}} type="file" name="" id="chooseimg" accept="image/*"></input>
+  //   <Avatar onClick={${changeAvaitor}} src={${logo}} className={${styles.logo}} />
+  //   </div>`
+  // } 
+  console.log(logo)
+
+  // const setlogopic = (event) => {
+  //   var picture = event.target.files[0];
+  //   var src     = URL.createObjectURL(picture);
+
+  //   setLogo({
+  //     pic: picture,
+  //     src: src
+  //   })
+      // `<input onChange=${(e) => setLogo(e.target.files[0])} required className={${styles.logo}} type="file" name="" id="chooseimg" accept="image/*"></input>
+      // <Avatar onClick={${setlogopic}} src={${logo}} className={${styles.logo}} />`
+  // }
+
+  // const renderPreview = () => {
+  //   if(logo.src) {
+  //     return (
+  //       <Avatar onClick={setlogopic} src={logo} className={styles.logo} />
+  //     );
+  //   } else {
+  //     return (
+  //       <p>
+  //         No Preview
+  //       </p>
+  //     );
+  //   }
+  // }
+
+
+
   
   return (
     <div className={styles.header}>
       <div className={styles.logonav}>
+        {/* {click ? ( 
+        <div>
+        <input onChange={(e) => setLogo(e.target.files[0])} required className={styles.logo} type="file" name="" id="chooseimg" accept="image/*"></input>
+          <Avatar src={logo} className={styles.logo} />
+          </div>
+        ) : ( */}
         <div className={styles.logocontainer}>
           <a href="#">
-            {/* <img src={Logo} className="logo" /> */}
-            <Avatar src={Logo} className={styles.logo} />
+            <Avatar src={logo} className={styles.logo} />
           </a>
-        </div>
+        </div> 
+         {/* )} */}
 
         <ul className={click ? styles.navoptions.active : styles.navoptions}>
           <li className={styles.option} onClick={closeMobileMenu}>
@@ -53,7 +97,7 @@ const Navbar = () => {
       </ul>
       <div className={styles.mobilemenu + styles.mobileoption } onClick={handleClick}>
         {click ? (
-          <CloseIcon className={styles.menuicon} />
+          <CloseIcon className={styles.closeicon} />
         ) : (
           <MenuIcon className={styles.menuicon} />
         )}

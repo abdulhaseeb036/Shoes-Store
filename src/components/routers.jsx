@@ -3,6 +3,7 @@ import Navbar from './navbar/navbar';
 import Home from '../components/home/home'
 import Signin from '../components/sigin/signin'
 import Signup from '../components/signup/signup'
+import Profile from '../components/profile/profile'
 
 import { BrowserRouter, Routes, Route,} from 'react-router-dom';
 
@@ -16,6 +17,7 @@ function ReactRouter() {
                     <Route exact path="/" element={<Home />}></Route>
                     <Route  path="signin" element={<Signin />}></Route>
                     <Route  path="signup" element={<Signup />}></Route>
+                    <Route  path="profile" element={<Profile />}></Route>
                     <Route  path="*" element={"not found"}></Route>
                 </Routes>
             </BrowserRouter>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import 'firebase/database'
+import 'firebase/storage'
 import { GlobalContext } from '../api/contextapi';
 import firebase from 'firebase/app'
 import styles from '../home/home.module.css';
@@ -56,39 +57,51 @@ function Home() {
   const [prize, setPrize] = useState([]);
   const [description, setDescription] = useState([])
   const [pic, setPic] = useState([]);
+  const [firedata, setFiredata] = useState([]);
   const [product, setProduct] = useState([
     {
       name: name,
       prize: prize,
       des: description,
-      pic: pic
+      pic
     }
   ])
 
-  const [firedata, setFiredata] = useState([]);
   useEffect(() => {
     async function getdailydata() {
-      firebase.database().ref('products').on("value", namepro => {
-        [namepro.val()].map(pro => {
-          Object.values(pro).map(vall =>
-            setFiredata(vall)
-          )
-        })
+      await firebase.database().ref('products').on("value", namepro => {
+        var valll = namepro.val();
+        setFiredata(valll)
+
       })
     }
     getdailydata();
   }, []);
+  
+  console.log(product);
 
+
+  // //  ON CLICK SUBMIT DATA:
   const sumbitdata = (e) => {
     e.preventDefault()
-    setProduct({ name: name, prize: prize, dis: description, pic: pic });
+    var uploadTask = firebase.storage().ref().child(`images/${pic.name}`).put(pic);
+    uploadTask.on('state_changed',
+      (snapshot) => {
+        uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+          console.log('File available at', downloadURL);
+          setProduct({ name: name, prize: prize, dis: description, pic: downloadURL });
+        });
+      }
+    );
+    firebase.storage().ref().child(`images/${pic.name}`).put(pic)
     firebase.database().ref('products').push(product);
   }
 
   return (
+     
     <div className={styles.container}>
       <Card className={styles.formcard}>
-        <h2>Add Products</h2>
+        <h2>Add Shoes</h2>
         <Divider className={styles.dividerform} variant="middle" />
         <form className={styles.form} onSubmit={sumbitdata}>
           <Grid className={styles.gridform} container spacing={2}>
@@ -106,41 +119,36 @@ function Home() {
               <CssTextField required id="outlined-multiline-static" label="Enter Description" multiline rows={1.5} variant="outlined" onChange={(e) => setDescription(e.target.value)} />
             </Grid>
             <Grid item xm={12} md={3} lg={3} xl={3}>
-              {/* <Button component="input" type="file" accept="image/*" variant="contained" color="default" className={classes.button} startIcon={<CloudUploadIcon />}> */}
-              {/* Upload Image */}
-              {/* </Button> */}
               <a href="#"> Upload Image
-              <input onChange={(e) => setPic(e.target.value)} required className={styles.uploadimgip} type="file" name="" id="chooseimg" accept="image/*"></input>
+              <input onChange={(e) => setPic(e.target.files[0])} required className={styles.uploadimgip} type="file" name="" id="chooseimg" accept="image/*"></input>
               </a>
             </Grid>
           </Grid>
-          <Button type="submit" variant="contained">Upload Add</Button>
+          <Button type="submit" variant="contained">Submit</Button>
         </form>
       </Card>
 
-      {Object.values(firedata).map((vl, ind) => {
-        console.log(vl)
+  
+
+      {Object.values(firedata).map((vll, ind) => {
         return (
-          <Card>
-            <h1 key={ind}>{vl}</h1>
-          </Card>
+         <Grid key={ind} className={styles.gridform} container spacing={2}>
+            <Grid item xm={12} md={3} lg={3} xl={3}>
+              <Card className={styles.dataa}>
+                <h3>{vll.name}</h3>
+                <h3>Prize: $ {vll.prize}</h3>
+                <h4> {vll.dis}</h4>
+                <img alt="img" src={vll.pic} />
+              </Card>
+            </Grid>
+          </Grid>
         )
+
       })}
 
 
-
-
-
-
-
-      {/* <ul>
-        {Object.values(firedata).map((value, ind) => {
-          return (
-            <li key={ind}>{value}</li>
-          )
-        })}
-      </ul> */}
     </div>
+
   )
 }
 
