@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import firebase from 'firebase/app'
 import 'firebase/database'
 import 'firebase/storage'
-import { GlobalContext } from '../api/contextapi';
-import firebase from 'firebase/app'
 import styles from '../home/home.module.css';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import classes from '../home/home.module.css';
 import { Divider, Button, Grid, Card, Input, TextField, InputLabel, InputAdornment, StepIcon } from '@material-ui/core'
+import { useNavigate, Outlet,useParams,Link } from 'react-router-dom';
 
 
 const CssTextField = withStyles({
@@ -31,11 +31,9 @@ const CssTextField = withStyles({
   },
 })(TextField);
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-
   },
   margin: {
     margin: theme.spacing(1),
@@ -43,14 +41,7 @@ const useStyles = makeStyles((theme) => ({
   button: {
     margin: theme.spacing(1),
   },
-
 }));
-
-function CustomizedInputs() {
-  const classes = useStyles();
-}
-
-
 
 function Home() {
   const [name, setName] = useState([]);
@@ -58,6 +49,7 @@ function Home() {
   const [description, setDescription] = useState([])
   const [pic, setPic] = useState([]);
   const [firedata, setFiredata] = useState([]);
+  const history = useNavigate();
   const [product, setProduct] = useState([
     {
       name: name,
@@ -66,6 +58,8 @@ function Home() {
       pic
     }
   ])
+
+  const { id } = useParams()
 
   useEffect(() => {
     async function getdailydata() {
@@ -76,29 +70,30 @@ function Home() {
       })
     }
     getdailydata();
-  }, []);
-  
-  console.log(product);
-
+  }, [])
 
   // //  ON CLICK SUBMIT DATA:
   const sumbitdata = (e) => {
     e.preventDefault()
-    var uploadTask = firebase.storage().ref().child(`images/${pic.name}`).put(pic);
-    uploadTask.on('state_changed',
-      (snapshot) => {
-        uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-          console.log('File available at', downloadURL);
-          setProduct({ name: name, prize: prize, dis: description, pic: downloadURL });
-        });
-      }
-    );
     firebase.storage().ref().child(`images/${pic.name}`).put(pic)
+    var uploadTask = firebase.storage().ref().child(`images/${pic.name}`).put(pic);
+    uploadTask.on('state_changed', (snapshot) => {
+      uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+        setProduct({ name: name, prize: prize, dis: description, pic: downloadURL });
+      });
+    }
+    );
     firebase.database().ref('products').push(product);
   }
 
+  /// On Add to cart Cliks change route
+  // const routeChange = () => {
+  //   let path = `home/${id}`;
+  //   history(path);
+  // }
+
+
   return (
-     
     <div className={styles.container}>
       <Card className={styles.formcard}>
         <h2>Add Shoes</h2>
@@ -128,27 +123,28 @@ function Home() {
         </form>
       </Card>
 
-  
+      <div className={styles.gridproductscon}>
+        {Object.values(firedata).map((vll, ind) => {
+          return (
+            <Card key={ind} className={styles.dataa}>
+              <div className={styles.imgcontainer}>
+                <img alt="img" className={styles.uploadedimg} src={vll.pic} />
+              </div>
+              <h3>Name: {vll.name}</h3>
+              <h3>Prize: $ {vll.prize}</h3>
+              <div className={styles.descriptiondiv}>
+                <h4 className={styles.des}>Description:  {vll.dis}</h4>
+              </div>
+              <Button>
 
-      {Object.values(firedata).map((vll, ind) => {
-        return (
-         <Grid key={ind} className={styles.gridform} container spacing={2}>
-            <Grid item xm={12} md={3} lg={3} xl={3}>
-              <Card className={styles.dataa}>
-                <h3>{vll.name}</h3>
-                <h3>Prize: $ {vll.prize}</h3>
-                <h4> {vll.dis}</h4>
-                <img alt="img" src={vll.pic} />
-              </Card>
-            </Grid>
-          </Grid>
-        )
-
-      })}
-
-
+                <Link to={`/${id}`}>Add To Card</Link>
+                </Button>
+            </Card>
+          )
+        })}
+      </div>
+      <Outlet />
     </div>
-
   )
 }
 

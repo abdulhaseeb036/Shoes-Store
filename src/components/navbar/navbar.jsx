@@ -1,12 +1,29 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import Logo from '../../assests/profile.png';
 import Avatar from '@material-ui/core/Avatar';
 import styles from '../navbar/navbar.module.css';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
 import {Link} from 'react-router-dom';
+import {UserContext} from '../api/contextapi'
+import 'firebase/auth';
 
 const Navbar = () => {
+  const user = useContext(UserContext);
+
+ if (user) {
+  var {photoURL,displayName,email} = user 
+
+ } 
+ console.log(photoURL)
+ 
+//  else {
+//    return {
+//    "loading"
+//    }
+//   }
+  console.log(user)
+
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
@@ -60,7 +77,7 @@ const Navbar = () => {
         ) : ( */}
         <div className={styles.logocontainer}>
           <a href="#">
-            <Avatar src={logo} className={styles.logo} />
+            <Avatar src={photoURL} className={styles.logo} />
           </a>
         </div> 
          {/* )} */}
@@ -70,10 +87,10 @@ const Navbar = () => {
             <Link to='/'>Home</Link>
           </li>
           <li className={styles.option} onClick={closeMobileMenu}>
-            <a href="#">Shoes</a>
+            <Link to='products'>Shoes</Link>
           </li>
           <li className={styles.option} onClick={closeMobileMenu}>
-            <a href="#">My account</a>
+            <Link to="profile">My account</Link>
           </li>
           <li className={styles.option  + " " + styles.mobileoption} onClick={closeMobileMenu}>
             <Link to="signin" >SIGN-IN</Link>

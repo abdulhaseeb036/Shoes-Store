@@ -4,6 +4,8 @@ import Home from '../components/home/home'
 import Signin from '../components/sigin/signin'
 import Signup from '../components/signup/signup'
 import Profile from '../components/profile/profile'
+import Products from '../components/products/products'
+import Productsdetail from '../components/productsDetals/productsdetail'
 
 import { BrowserRouter, Routes, Route,} from 'react-router-dom';
 
@@ -15,6 +17,8 @@ function ReactRouter() {
             <Navbar />
                 <Routes>
                     <Route exact path="/" element={<Home />}></Route>
+                      <Route  path=":id" element={<Productsdetail />}></Route>
+                    <Route  path="products" element={<Products />}></Route>
                     <Route  path="signin" element={<Signin />}></Route>
                     <Route  path="signup" element={<Signup />}></Route>
                     <Route  path="profile" element={<Profile />}></Route>
@@ -22,6 +26,8 @@ function ReactRouter() {
                 </Routes>
             </BrowserRouter>
         </div>
+
+
     )
 }
 
