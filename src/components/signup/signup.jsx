@@ -4,7 +4,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 // import firebase from 'firebase/app'
 // import 'firebase/database'
 // import 'firebase/storage'
-import { signup } from '../api/contextapi';
+// import { signup } from '../api/contextapi';
 import {useNavigate} from 'react-router-dom';
 
 function Copyright() {
@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Signup() {
 
-  const signu = useContext(signup);
+  // const signu = useContext(signup);
   const classes = useStyles();
 
   // const [fname, setfName] = useState('')
