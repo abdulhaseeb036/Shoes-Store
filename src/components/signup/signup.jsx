@@ -1,10 +1,10 @@
-import React, { useState,useContext } from 'react';
+import React, { useState } from 'react';
 import {Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Box, Typography, makeStyles, Container, Grid} from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 // import firebase from 'firebase/app'
 // import 'firebase/database'
 // import 'firebase/storage'
-// import { signup } from '../api/contextapi';
+import { signup } from '../api/contextapi';
 import {useNavigate} from 'react-router-dom';
 
 function Copyright() {
