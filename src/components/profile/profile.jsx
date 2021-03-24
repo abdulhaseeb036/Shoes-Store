@@ -5,9 +5,9 @@ import { Button } from '@material-ui/core'
 import Signin from '../sigin/signin'
 function Profile() {
 
-    const user = useContext(UserContext);
+    const {user} = useContext(UserContext);
     if (user) {
-    var { photoURL, displayName, email } = user;
+    var {displayName, email } = user;
     }
 
     return (

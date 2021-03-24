@@ -1,6 +1,7 @@
 html,
 body {
     overflow-x: hidden;
+    font-family: 'Indie Flower', cursive !important;
 }
 
 .container {
@@ -9,14 +10,98 @@ body {
     text-align: center;
     align-items: center;
     overflow-x: hidden;
-
 }
 
+/* .container1 {
+    box-shadow: 0px 0px 10px !important;
+    display: flex !important;
+    max-width: 80%;
+    justify-content: center !important;
+    align-items: center !important;
+    border-radius: 10px;
+}
+.con1beneath {
+    width: 100% !important;
+    max-width: 400px !important
+}
+.header {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+.name {
+    display: inline-block;
+    display: flex;
+    flex-wrap: wrap;
+    width: 130px;
+    justify-content: center;
+    padding: 5px;
 
+} */
+
+/* .datecon { */
+    /* display: inline-block; */
+    /* flex-direction: row; */
+    /* display: flex;
+    flex-wrap: wrap; */
+    /* width: 130px; */
+    /* border: green solid !important; */
+    /* justify-content: center; */
+    /* padding: 5px; */
+
+/* } */
+
+
+/* .productdivider {
+    color: black !important;
+    margin-right: 8px !important;
+}
+.productcon {
+    display: inline-block;
+    display: flex;
+    flex-wrap: wrap;
+    border: red solid;
+    width: auto;
+    justify-content: center;
+
+}
+.datacon {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 5px;
+}
+.datacon > div{
+    padding: 5px;
+    max-width: 200px;
+}
+.pdiv {
+    width: 100%;
+}
+.nameofperson {
+    width: 130px;
+    border: black solid;
+    display: flex;
+    flex-wrap: wrap;
+}
+.nn {
+    display: flex;
+    flex-wrap: wrap;
+}
+.dateofposting {
+    width: 130px;
+    border: red solid;
+}
+
+.projectdetaile {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+} */
 .formcard {
 
     padding: 10px 0px !important;
-    box-shadow: 0px 0px 5px grey !important;
+    box-shadow: 0px 0px 10px grey !important;
     margin-top: 10px !important;
     margin-bottom: 10px !important;
 }
@@ -65,6 +150,8 @@ body {
     max-width: 400px;
     margin: 8px !important;
     padding: 10px;
+    width: 160px !important;
+ 
 }
 
 a {
@@ -103,14 +190,34 @@ a {
         .formcard {
             padding:10px !important;
         }
+        .dataa {
+            width: 300px !important;
+        }
 }
+
+/* @media (max-width: 700px) {
+    .container {
+        width: 500px !important;
+    }
+   
+    .formcard {
+        padding: 10px !important;
+     
+    }
+} */
 
 @media (max-width: 400px) {
     .container {
-        width: 300px !important;
+        width: 400px !important;
     }
     .formcard {
         padding: 10px !important;
         
+    }
+    .dataa {
+        width: 200px !important;
+    }
+    .gridproductscon{
+        width: 300px !important;
     }
 }

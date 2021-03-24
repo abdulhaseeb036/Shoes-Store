@@ -1,21 +1,14 @@
 import React, { useState,useContext } from 'react';
 import 'firebase/auth';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
+import {Avatar,Button,CssBaseline,TextField,FormControlLabel,Checkbox,Link,Grid,Box,Typography,Container,makeStyles} from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
 import Profile from '../profile/profile';
 import { signInWithGoogle } from '../api/firebaseCon'
 import {UserContext} from '../api/contextapi'
+import styles from '../sigin/signin.module.css';
+import {signin} from '../api/contextapi';
+import { useNavigate} from 'react-router-dom';
+
 function Copyright() {
 
     return (
@@ -23,7 +16,7 @@ function Copyright() {
         <Typography variant="body2" color="textSecondary" align="center">
             {'Copyright © '}
             <Link color="inherit" href="https://material-ui.com/">
-                Your Website
+                Haseeb Alam Rafiq Website
       </Link>{' '}
             {new Date().getFullYear()}
             {'.'}
@@ -53,16 +46,22 @@ const useStyles = makeStyles((theme) => ({
 
 function Signin() {
     const classes = useStyles();
+    const history = useNavigate();
 
-    const user = useContext(UserContext);
+    const {user} = useContext(UserContext);
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState(null);
+    // const [error, setError] = useState(false);
 
     const signInWithEmailAndPasswordHandler = (event, email, password) => {
         event.preventDefault();
-        console.log(email, password);
+   
+            signin(email,password);
+            
+            history('/profile')
+            console.log(email, password);
+    
     };
 
     const onChangeHandler = (event) => {
@@ -133,11 +132,10 @@ function Signin() {
                                 type="submit"
                                 fullWidth
                                 variant="contained"
-                                color="primary"
-                                className={classes.submit}
+                                className={classes.submit + " " + styles.googlesigin}
                                 onClick={(event) => {signInWithGoogle(event)}}
                             >
-                                Sign In
+                                SignIn with Google
           </Button>
                             <Grid container>
                                 <Grid item xs>

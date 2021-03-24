@@ -17,6 +17,8 @@ var firebaseConfig = {
     firebase.auth().signInWithPopup(provider);
   };
 
+
+
   export const signout = (event) => {
     event.preventDefault();
     firebase.auth().signOut()

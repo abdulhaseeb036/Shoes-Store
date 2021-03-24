@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import firebase from 'firebase/app'
 import 'firebase/database'
 
@@ -17,20 +17,22 @@ function Productsdetail() {
     getdailydata();
   }, [])
 
-  const { id } = useParams()
-  const shoe = firedata[id]
+  const { slug } = useParams()
+  const shoe = firedata[slug]
   console.log(shoe);
   return (
     <div>
       products deattailes here
-      {Object.values(firedata).map((vll, id) => {
+      {Object.values(firedata).map((vll, ind) => {
         return (
           <div>
-            <div key={id}>
+              <Link to={`/${slug}`}>
+            <div key={ind}>
               <img alt="img" src={vll.pic} />
             </div>
             <h3>Name: {vll.name}</h3>
             <h3>Prize: $ {vll.prize}</h3>
+            </Link>
           </div>
         )
       })}

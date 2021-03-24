@@ -16,8 +16,9 @@ function ReactRouter() {
             <BrowserRouter>
             <Navbar />
                 <Routes>
-                    <Route exact path="/" element={<Home />}></Route>
-                      <Route  path=":id" element={<Productsdetail />}></Route>
+                    <Route exact path="/" element={<Home />}>
+                    <Route  path=":slug" element={<Productsdetail />}></Route>
+                    </Route>
                     <Route  path="products" element={<Products />}></Route>
                     <Route  path="signin" element={<Signin />}></Route>
                     <Route  path="signup" element={<Signup />}></Route>

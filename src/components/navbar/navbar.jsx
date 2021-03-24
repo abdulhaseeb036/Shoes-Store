@@ -1,5 +1,4 @@
 import React, { useState,useContext } from "react";
-import Logo from '../../assests/profile.png';
 import Avatar from '@material-ui/core/Avatar';
 import styles from '../navbar/navbar.module.css';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -9,78 +8,24 @@ import {UserContext} from '../api/contextapi'
 import 'firebase/auth';
 
 const Navbar = () => {
-  const user = useContext(UserContext);
+  const {user} = useContext(UserContext);
 
  if (user) {
-  var {photoURL,displayName,email} = user 
+  var {photoURL} = user 
 
  } 
- console.log(photoURL)
- 
-//  else {
-//    return {
-//    "loading"
-//    }
-//   }
-  console.log(user)
 
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
-  const [logo, setLogo] = useState();
 
-  // const changeAvaitor = () => {
-  //   `<div>
-  //   <input onChange={${(e) => setLogo(e.target.files[0])}} required className={${styles.logo}} type="file" name="" id="chooseimg" accept="image/*"></input>
-  //   <Avatar onClick={${changeAvaitor}} src={${logo}} className={${styles.logo}} />
-  //   </div>`
-  // } 
-  console.log(logo)
-
-  // const setlogopic = (event) => {
-  //   var picture = event.target.files[0];
-  //   var src     = URL.createObjectURL(picture);
-
-  //   setLogo({
-  //     pic: picture,
-  //     src: src
-  //   })
-      // `<input onChange=${(e) => setLogo(e.target.files[0])} required className={${styles.logo}} type="file" name="" id="chooseimg" accept="image/*"></input>
-      // <Avatar onClick={${setlogopic}} src={${logo}} className={${styles.logo}} />`
-  // }
-
-  // const renderPreview = () => {
-  //   if(logo.src) {
-  //     return (
-  //       <Avatar onClick={setlogopic} src={logo} className={styles.logo} />
-  //     );
-  //   } else {
-  //     return (
-  //       <p>
-  //         No Preview
-  //       </p>
-  //     );
-  //   }
-  // }
-
-
-
-  
   return (
     <div className={styles.header}>
       <div className={styles.logonav}>
-        {/* {click ? ( 
-        <div>
-        <input onChange={(e) => setLogo(e.target.files[0])} required className={styles.logo} type="file" name="" id="chooseimg" accept="image/*"></input>
-          <Avatar src={logo} className={styles.logo} />
-          </div>
-        ) : ( */}
         <div className={styles.logocontainer}>
-          <a href="#">
+          {/* <a href="#"> */}
             <Avatar src={photoURL} className={styles.logo} />
-          </a>
         </div> 
-         {/* )} */}
 
         <ul className={click ? styles.navoptions.active : styles.navoptions}>
           <li className={styles.option} onClick={closeMobileMenu}>

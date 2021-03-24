@@ -56,6 +56,9 @@
   .mobilemenu {
     display: none !important;
   }
+  .menuicon {
+    display: none !important;
+  }
   .navbar_mobilemenu__eubgOnavbar_mobileoption__3fLik {
     display: none !important;
   }
@@ -94,10 +97,11 @@
     }
   
     .menuicon {
-      width: 45px !important;
+      display: block !important;
       border: red solid !important;
-      margin-top: -30px !important;
-      /* height: 45px !important; */
+      position: absolute !important;
+      top: 10px !important;
+      right: 10px !important;
     }
     .closeicon {
       border: green solid !important;
@@ -124,6 +128,8 @@
     }
     .mobilemenu {
       display: block !important;
+      position: absolute !important;
+      margin-bottom: 200px !important;
     }
   }
 

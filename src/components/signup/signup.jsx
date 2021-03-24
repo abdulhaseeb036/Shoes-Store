@@ -1,26 +1,11 @@
-// import React from 'react';
-// function Signup() {
-//   return (
-  
-//   );
-// }
-
-// export default Signup;
-
-import React, { useState } from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
+import React, { useState,useContext } from 'react';
+import {Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Box, Typography, makeStyles, Container, Grid} from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
+import firebase from 'firebase/app'
+import 'firebase/database'
+import 'firebase/storage'
+import { signup } from '../api/contextapi';
+import {useNavigate} from 'react-router-dom';
 
 function Copyright() {
   return (
@@ -56,6 +41,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Signup() {
+
+  const signu = useContext(signup);
   const classes = useStyles();
 
   const [fname, setfName] = useState('')
@@ -63,16 +50,18 @@ export default function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [displayName, setDisplayName] = useState();
-  const [error, setError] = useState(null);
+  // const [error, setError] = useState('');
 
-  const createUserWithEmailAndPasswordHandler = (event, fname, lname,email,password) => {
+  const history = useNavigate();
+
+  const createUserWithEmailAndPasswordHandler = (event,email,password) => {
     event.preventDefault();
-    // setEmail('');
-    // setPassword('');
-    // setDisplayName('')
-    console.log(fname,lname,displayName,email,password)
+    signup(email,password);
+    history('/signin');
+    console.log(email,password)
   };
-  
+
+
   const onChangeHandler  = (event) => {
     const {name, value} = event.currentTarget;
      
@@ -92,6 +81,7 @@ export default function Signup() {
     else if (name === "displayName") {
       setDisplayName(value);
     }
+
   }
   return (
     <Container component="main" maxWidth="xs">
@@ -182,7 +172,7 @@ export default function Signup() {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={(event) => createUserWithEmailAndPasswordHandler(event,fname, lname,displayName,email,password)}
+            onClick={(event) => createUserWithEmailAndPasswordHandler(event,email,password)}
           >
             Sign Up
           </Button>
