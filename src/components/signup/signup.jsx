@@ -1,9 +1,9 @@
 import React, { useState,useContext } from 'react';
 import {Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Box, Typography, makeStyles, Container, Grid} from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import firebase from 'firebase/app'
-import 'firebase/database'
-import 'firebase/storage'
+// import firebase from 'firebase/app'
+// import 'firebase/database'
+// import 'firebase/storage'
 import { signup } from '../api/contextapi';
 import {useNavigate} from 'react-router-dom';
 
@@ -45,11 +45,11 @@ export default function Signup() {
   const signu = useContext(signup);
   const classes = useStyles();
 
-  const [fname, setfName] = useState('')
-  const [lname, setlName] = useState('');
+  // const [fname, setfName] = useState('')
+  // const [lname, setlName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [displayName, setDisplayName] = useState();
+  // const [displayName, setDisplayName] = useState();
   // const [error, setError] = useState('');
 
   const history = useNavigate();
@@ -65,22 +65,22 @@ export default function Signup() {
   const onChangeHandler  = (event) => {
     const {name, value} = event.currentTarget;
      
-    if(name === "fname") {
-      setfName(value)
-    }
-    else if (name === "lname") {
-      setlName(value)
-    }
-   else if (name === "userEmail") {
+    // if(name === "fname") {
+    //   setfName(value)
+    // }
+    // else if (name === "lname") {
+    //   setlName(value)
+    // }
+   if (name === "userEmail") {
       setEmail(value);
     }
 
     else if (name === "userPassword") {
       setPassword(value);
     }
-    else if (name === "displayName") {
-      setDisplayName(value);
-    }
+    // else if (name === "displayName") {
+    //   setDisplayName(value);
+    // }
 
   }
   return (
